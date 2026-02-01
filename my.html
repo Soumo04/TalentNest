@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Portal - Job Application Management</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" fill="url(#gradient1)"/>
+                            <defs>
+                                <linearGradient id="gradient1" x1="4" y1="2" x2="28" y2="30">
+                                    <stop offset="0%" stop-color="#667eea"/>
+                                    <stop offset="100%" stop-color="#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">TalentNest</span>
+                </div>
+                <nav class="nav">
+                    <a href="#jobs" class="nav-link active">Jobs</a>
+                    <a href="#apply" class="nav-link">Apply</a>
+                    <a href="#status" class="nav-link">Check Status</a>
+                    <a href="#admin" class="nav-link">Admin</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Find Your Dream Career</h1>
+                <p class="hero-subtitle">Join innovative teams and shape the future of technology</p>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Jobs Section -->
+            <section id="jobs" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Open Positions</h2>
+                    <p class="section-description">Explore exciting opportunities and take the next step in your career</p>
+                </div>
+                <div id="jobsList" class="jobs-grid">
+                    <!-- Jobs will be loaded here -->
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Loading available positions...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apply Section -->
+            <section id="apply" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Submit Your Application</h2>
+                    <p class="section-description">Take the first step towards your new career journey</p>
+                </div>
+                <div class="form-container">
+                    <form id="applicationForm" class="application-form">
+                        <div class="form-group">
+                            <label for="jobSelect" class="form-label">Select Position</label>
+                           <select id="jobSelect" class="form-input" required>
+  
+  <option value="developer">Software Developer</option>
+  <option value="designer">UI/UX Designer</option>
+  <option value="manager">Project Manager</option>
+  <option value="analyst">Data Analyst</option>
+  <option value="intern">Intern</option>
+</select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="candidateName" class="form-label">Full Name</label>
+                            <input type="text" id="candidateName" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="candidateEmail" class="form-label">Email Address</label>
+                            <input type="email" id="candidateEmail" class="form-input" placeholder="john.doe@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resumeLink" class="form-label">Resume Link</label>
+                            <input type="url" id="resumeLink" class="form-input" placeholder="https://drive.google.com/your-resume" required>
+                            <span class="form-hint">Provide a link to your resume (Google Drive, Dropbox, etc.)</span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">Submit Application</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                    <div id="applicationSuccess" class="success-message" style="display: none;">
+                        <div class="success-icon">✓</div>
+                        <h3>Application Submitted!</h3>
+                        <p>Your application ID: <strong id="applicationId"></strong></p>
+                        <p>Use this ID to check your application status</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Check Section -->
+            <section id="status" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Check Application Status</h2>
+                    <p class="section-description">Track your application progress in real-time</p>
+                </div>
+                <div class="form-container">
+                    <form id="statusForm" class="status-form">
+                        <div class="form-group">
+                            <label for="applicationIdInput" class="form-label">Application ID</label>
+                            <input type="text" id="applicationIdInput" class="form-input" placeholder="Enter your application ID" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">
+                            <span class="btn-text">Check Status</span>
+                            <span class="btn-icon">🔍</span>
+                        </button>
+                    </form>
+                    <div id="statusResult" class="status-result" style="display: none;">
+                        <!-- Status will be displayed here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Section -->
+            <section id="admin" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Admin Panel</h2>
+                    <p class="section-description">Manage and update application statuses</p>
+                </div>
+                <div class="form-container">
+                    <form id="updateStatusForm" class="admin-form">
+                        <div class="form-group">
+                            <label for="adminApplicationId" class="form-label">Application ID</label>
+                            <input type="text" id="adminApplicationId" class="form-input" placeholder="Enter application ID" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newStatus" class="form-label">Update Status To</label>
+                            <select id="newStatus" class="form-input" required>
+                                <option value="">Select new status...</option>
+                                <option value="APPLIED">Applied</option>
+                                <option value="SHORTLISTED">Shortlisted</option>
+                                <option value="SELECTED">Selected</option>
+                                <option value="REJECTED">Rejected</option>
+                            </select>
+                        </div>
+                        
+                        <div class="status-flow-info">
+                            <p class="info-title">Valid Status Transitions:</p>
+                            <div class="flow-diagram">
+                                <span class="flow-step">APPLIED</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-step">SHORTLISTED</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-step">SELECTED</span>
+                                <br>
+                                <span class="flow-step-alt">↘ REJECTED</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-admin">
+                            <span class="btn-text">Update Status</span>
+                            <span class="btn-icon">⚡</span>
+                        </button>
+                    </form>
+                    <div id="adminResult" class="admin-result" style="display: none;">
+                        <!-- Update result will be displayed here -->
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" fill="url(#gradient2)"/>
+                                <defs>
+                                    <linearGradient id="gradient2" x1="4" y1="2" x2="28" y2="30">
+                                        <stop offset="0%" stop-color="#667eea"/>
+                                        <stop offset="100%" stop-color="#764ba2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="logo-text">TalentNest</span>
+                    </div>
+                    <p class="footer-description">Connecting talented professionals with innovative companies</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#jobs">Browse Jobs</a></li>
+                        <li><a href="#apply">Apply Now</a></li>
+                        <li><a href="#status">Check Status</a></li>
+                        <li><a href="#admin">Admin Panel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 TalentNest. All rights reserved.</p>
+                <p>Built with ♥ for Technothon</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-icon"></span>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="./server.js"></script>
+</body>
+</html>
